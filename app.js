@@ -1,6 +1,6 @@
 let config = {
     renderer: Phaser.AUTO,
-    width: 800, //width of game in pixels
+    width: 900, //width of game in pixels
     height: 600, //height of game in pixels
     physics: {
         default: 'arcade',
@@ -71,8 +71,11 @@ function create(){ // generate elements to appear in our game like images from o
     this.physics.add.collider(bird, bottomColumns); //bird will not pass thru columns
 
     //Create game instructions
-    messageToPlayer = this.add.text(0,0, 'Instructions: Press space bar to start', {fontSize: '20px', backgroundColor: 'black'})
+    messageToPlayer = this.add.text(0,0, 'Instructions: Press space bar to start', {fontSize: '20px', backgroundColor: 'grey'})
     Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, -100, 50) // moves msg to bottom on the screen
+
+    //reset game
+    this.input.keyboard.on('keydown-R', resetGame, this)
 }
 
 function update() {
@@ -112,11 +115,18 @@ function update() {
     }
 
     if(hasLanded || hasBumped){
-        messageToPlayer.text = 'Oh no! You crashed!'
+        messageToPlayer.text = 'Oh no! You crashed!\n Press "r" to play again'
     }
 
     if(bird.x > 750){
         bird.setVelocityY(40)
         messageToPlayer.text = 'Congrats! You won!'
     }
+}
+
+function resetGame(){
+    hasLanded = false
+    hasBumped = false
+    isGameStarted = false;
+    this.scene.restart()
 }
