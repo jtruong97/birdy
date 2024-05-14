@@ -1,6 +1,6 @@
 # birdy
 
-birdy is a flappy bird clone that I created.
+## [Click here to play!](https://jtruong97.github.io/birdy/)
 
 ## How to play:
 Press your space bar key to start the game
